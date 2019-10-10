@@ -1,3 +1,4 @@
+
 node {
     def app
 
@@ -10,7 +11,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-        app = docker.build("nodeapp/nodeapp")
+        app = docker.build("kohbah/nodeapp")
     }
 
     stage('Test image') {
@@ -24,7 +25,7 @@ node {
         /* 
 			You would need to first register with DockerHub before you can push images to your account
 		*/
-        docker.withRegistry('https://34.235.120.79:8081', 'jfrogaws') {
+        docker.withRegistry('https://kohbah-nodeapp.jfrog.io', 'jfrogmarcel') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
