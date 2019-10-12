@@ -25,7 +25,7 @@ node {
         /* 
 			You would need to first register with DockerHub before you can push images to your account
 		*/
-        docker.withRegistry('https://10.0.1.113:8081.jfrog.io', 'jfrog-aws') {
+        docker.withRegistry('https://10.0.1.113:8081.jfrog.io', 'jfrogaws') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
