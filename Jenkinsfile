@@ -11,7 +11,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-        app = docker.build("nodeapp/latest")
+        app = docker.build("docker/latest")
     }
 
     stage('Test image') {
