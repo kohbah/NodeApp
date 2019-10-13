@@ -1,9 +1,9 @@
-
 node {
     def app
 
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
+	checkout scm
       steps {
         git 'https://github.com/gustavoapolinario/microservices-node-example-todo-frontend.git'      
       }
