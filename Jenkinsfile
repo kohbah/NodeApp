@@ -15,7 +15,7 @@ pipeline {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
-           app = docker.build("artifactory/nodeapp/latest")
+           app = docker.build("artifactory/nodeapp")
         }
       }
     }
