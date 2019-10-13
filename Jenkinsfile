@@ -4,8 +4,9 @@ node {
 
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
-
-        checkout scm
+      steps {
+        git 'https://github.com/gustavoapolinario/microservices-node-example-todo-frontend.git'      
+      }
     }
 
     stage('Build image') {
@@ -31,4 +32,8 @@ node {
             } 
                 echo "Trying to Push Docker Build to jfrog artifactory"
     }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
 }
