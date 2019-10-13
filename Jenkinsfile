@@ -1,27 +1,23 @@
-node {
-    def app
-
-    stage('Clone repository') {
-        /* Cloning the Repository to our Workspace */
-	checkout scm
+pipeline {
+  environment {
+    registry = "jfrog"
+    registryCredential = 'jfrog'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
       steps {
-        git 'https://github.com/gustavoapolinario/microservices-node-example-todo-frontend.git'      
+        git 'https://github.com/gustavoapolinario/microservices-node-example-todo-frontend.git'
       }
     }
-
-    stage('Build image') {
-        /* This builds the actual image */
-
-        app = docker.build("docker/latest")
-    }
-
-    stage('Test image') {
-        
-        app.inside {
-            echo "Tests passed"
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
+      }
     }
-
     stage('Push image') {
         /* 
 			You would need to first register with DockerHub before you can push images to your account
