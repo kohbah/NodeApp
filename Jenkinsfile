@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "http://10.0.1.113:8081/docker/latest "
+    registry = "/docker/latest "
     registryCredential = 'jfrog'
     dockerImage = ''
   }
