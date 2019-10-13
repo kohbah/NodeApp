@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "10.0.1.113:8081/docker/latest"
+    registry = "10.0.1.113:8081/nodeapp/latest"
     registryCredential = 'jfrog'
     dockerImage = ''
   }
@@ -15,7 +15,7 @@ pipeline {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
-           app = docker.build("docker")
+           app = docker.build("nodeapp/latest")
         }
       }
     }
