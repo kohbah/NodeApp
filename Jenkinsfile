@@ -22,7 +22,7 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-        docker.withRegistry('http://10.0.1.113:8081/artifactory', 'jfrog') {
+        docker.withRegistry('jfrog', 'jfrog') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
               }
