@@ -4,17 +4,6 @@ pipeline {
     registryCredential = 'jfrog'
     dockerImage = ''
   }
-  stage('Sonarqube') {
-    environment {
-        scannerHome = tool 'SonarQubeScanner'
-    }
-    steps {
-        withSonarQubeEnv('sonarqube') {
-            sh "${scannerHome}/bin/sonar-scanner"
-        }
-        timeout(time: 10, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-        }
   agent any
   stages {
     stage('Cloning Git') {
@@ -28,6 +17,19 @@ pipeline {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
            app = docker.build("nodeapp/myapp")
         }
+      }
+    }
+    stage('Sonarqube') {
+      environment {
+        scannerHome = tool 'SonarQubeScanner'
+             }
+      steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+             }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+         }
       }
     }
     stage('Deploy Image') {
