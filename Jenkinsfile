@@ -15,8 +15,6 @@ pipeline {
         timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
         }
-    }
-}
   agent any
   stages {
     stage('Cloning Git') {
