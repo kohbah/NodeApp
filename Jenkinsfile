@@ -10,12 +10,7 @@ pipeline {
       steps {
         git 'https://github.com/kohbah/standardjenkins.git'
       }
-    }
-    stage 'Gradle Static Analysis'
-    withSonarQubeEnv {
-        sh "./gradlew clean sonarqube"
-       }
-    }    
+    } 
     stage('Building image') {
       steps{
         script {
